@@ -89,24 +89,27 @@ document.addEventListener('keydown', function(e) {
 
 var hashto;
 
-function updateHash() {
-    window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(editor.getValue()))))
-}
+// function updateHash() {
+//     window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(editor.getValue()))))
+// }
 
-if (window.location.hash) {
-    var h = window.location.hash.replace(/^#/, '');
-    if (h.slice(0, 5) == 'view:') {
-        setOutput(decodeURIComponent(escape(RawDeflate.inflate(atob(h.slice(5))))));
-        document.body.className = 'view';
-    } else {
-        editor.setValue(decodeURIComponent(escape(RawDeflate.inflate(atob(h)))))
-        update(editor);
-        editor.focus();
-    }
-} else {
-    update(editor);
-    editor.focus();
-}
+// if (window.location.hash) {
+//     var h = window.location.hash.replace(/^#/, '');
+//     if (h.slice(0, 5) == 'view:') {
+//         setOutput(decodeURIComponent(escape(RawDeflate.inflate(atob(h.slice(5))))));
+//         document.body.className = 'view';
+//     } else {
+//         editor.setValue(decodeURIComponent(escape(RawDeflate.inflate(atob(h)))))
+//         update(editor);
+//         editor.focus();
+//     }
+// } else {
+//     update(editor);
+//     editor.focus();
+// }
+
+update(editor);
+editor.focus();
 
 var GoSquared = {
     acct: 'GSN-265185-D'
