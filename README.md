@@ -27,4 +27,4 @@ I had cloned from [jbt](https://github.com/jbt/markdown-editor). Thanks you very
 
 ### LICENSE
 
-[DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](LICENSEEhttp://www.wtfpl.net/txt/copying/)
+[DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](http://www.wtfpl.net/txt/copying/)
