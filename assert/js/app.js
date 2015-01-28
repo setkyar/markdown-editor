@@ -20,8 +20,8 @@ function update(e) {
 
     setOutput(val);
 
-    clearTimeout(hashto);
-    hashto = setTimeout(updateHash, 1000);
+    // clearTimeout(hashto);
+    // hashto = setTimeout(updateHash, 1000);
 }
 
 function setOutput(val) {
@@ -87,7 +87,7 @@ document.addEventListener('keydown', function(e) {
     }
 })
 
-var hashto;
+// var hashto;
 
 // function updateHash() {
 //     window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(editor.getValue()))))
