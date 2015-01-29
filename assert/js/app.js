@@ -2,12 +2,10 @@ var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;
 window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
 
-// Because highlight.js is a bit awkward at times
-var languageOverrides = {
-    js: 'javascript',
-    html: 'xml'
-}
+var hashto;
 
+// Because highlight.js is a bit awkward at times
+var languageOverrides = { js: 'javascript',html: 'xml'}
 marked.setOptions({
     highlight: function(code, lang) {
         if (languageOverrides[lang]) lang = languageOverrides[lang];
@@ -31,7 +29,6 @@ function setOutput(val) {
 
     document.getElementById('out').innerHTML = marked(val);
 }
-
 var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
     mode: 'gfm',
     lineNumbers: true,
@@ -40,7 +37,6 @@ var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
     theme: 'default',
     onChange: update
 });
-
 document.addEventListener('drop', function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -53,59 +49,6 @@ document.addEventListener('drop', function(e) {
 
     theReader.readAsText(theFile);
 }, false);
-
-function save() {
-    var code = editor.getValue();
-    var blob = new Blob([code], {
-        type: 'text/plain'
-    });
-    saveBlob(blob);
-}
-
-function saveBlob(blob) {
-    var name = "untitled.md";
-    if (window.saveAs) {
-        window.saveAs(blob, name);
-    } else if (navigator.saveBlob) {
-        navigator.saveBlob(blob, name);
-    } else {
-        url = URL.createObjectURL(blob);
-        var link = document.createElement("a");
-        link.setAttribute("href", url);
-        link.setAttribute("download", name);
-        var event = document.createEvent('MouseEvents');
-        event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-        link.dispatchEvent(event);
-    }
-}
-
-document.addEventListener('keydown', function(e) {
-    if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {
-        e.preventDefault();
-        save();
-        return false;
-    }
-})
-
-document.addEventListener('keydown', function(e) {
-    if (e.keyCode === 80 && e.ctrlKey) {
-        e.preventDefault();
-        print();
-        return false;
-    };
-})
-
-function print() { 
-    if (navigator.userAgent.indexOf("Chrome") != -1) {
-        var newWindow = window.open();
-        newWindow.document.write(document.getElementById("out").innerHTML);
-        newWindow.print();
-    };
-
-    console.log('We are now currently support chrome only. Because of Myanmar font rendering problem');
-}
-
-var hashto;
 
 function updateHash() {
     window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(editor.getValue()))))
@@ -126,6 +69,75 @@ if (window.location.hash) {
     editor.focus();
 }
 
-var GoSquared = {
-    acct: 'GSN-265185-D'
-};
+//When user try to save us markdown
+function saveMarkdown() {
+    var code = editor.getValue();
+    var blob = new Blob([code], {
+        type: 'text/plain'
+    });
+    saveBlob(blob);
+}
+
+/**
+* Get what user type on blob and save()
+* 
+* @param blob 
+*/
+function saveBlob(blob) {
+    var name = "untitled.md";
+    if (window.saveAs) {
+        window.saveAs(blob, name);
+    } else if (navigator.saveBlob) {
+        navigator.saveBlob(blob, name);
+    } else {
+        url = URL.createObjectURL(blob);
+        var link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", name);
+        var event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+        link.dispatchEvent(event);
+    }
+}
+
+//When user try to save us pdf
+function savePDF() { 
+    if (navigator.userAgent.indexOf("Chrome") != -1) {
+        var newWindow = window.open();
+        newWindow.document.write(document.getElementById("out").innerHTML);
+        newWindow.print();
+        newWindow.close();
+    };
+
+    console.log('We are now currently support chrome only. Because of Myanmar font rendering problem');
+}
+
+//Detact, when user click on Ctrl + S
+document.addEventListener('keydown', function(e) {
+    if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        saveMarkdown();   //Save Markdown
+        return false;
+    }
+})
+
+//Detact, when user click on Ctrl + P
+document.addEventListener('keydown', function(e) {
+    if (e.keyCode === 80 && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        savePDF();      //Save PDF
+        return false;
+    };
+});
+
+//When user want to download Markdown file
+var markdown = document.getElementById('download-markdown');
+markdown.addEventListener('click', function() {
+    saveMarkdown();
+}, false);
+
+//When user want to download PDF file
+var pdf = document.getElementById('download-pdf');
+pdf.addEventListener('click', function() {
+    savePDF();
+}, false);
