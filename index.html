@@ -2,67 +2,97 @@
 <html>
 <head>
   <meta property="keywords" content="markdown, online markdown editor, free, github, myanmar markdown editor">
-  <title>Markdown Editor</title>
+  <title>Yay | Markdown Editor</title>
 
   <script src="assert/js/marked.js"></script>
   <script src="assert/js/highlight.pack.js"></script>
 
-  <script src="codemirror/lib/codemirror.js"></script>
-  <script src="codemirror/xml/xml.js"></script>
-  <script src="codemirror/markdown/markdown.js"></script>
-  <script src="codemirror/gfm/gfm.js"></script>
-  <script src="codemirror/javascript/javascript.js"></script>
+  <script src="assert/lib/codemirror/lib/codemirror.js"></script>
+  <script src="assert/lib/codemirror/xml/xml.js"></script>
+  <script src="assert/lib/codemirror/markdown/markdown.js"></script>
+  <script src="assert/lib/codemirror/gfm/gfm.js"></script>
+  <script src="assert/lib/codemirror/javascript/javascript.js"></script>
   <script src="assert/js/rawinflate.js"></script>
   <script src="assert/js/rawdeflate.js"></script>
 
-  <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="assert/lib/codemirror/lib/codemirror.css">
   <link rel="stylesheet" href="assert/css/default.css">
   <link rel="stylesheet" type="text/css" href="assert/css/style.css">
+  <link rel="stylesheet" href='http://mmwebfonts.comquas.com/fonts/?font=padauk' />
 </head>
 <body>
 <div class="width:50%">
   <div id="in">
       <form>
           <textarea id="code">
+Yay (GitHub-Flavored) Markdown Editor
+===================
 
-  # (GitHub-Flavored) Markdown Editor
+  
+#### Basic useful feature list:
+  
 
-  Basic useful feature list:
+* Ctrl/Cmd + S to save the file
+* Ctrl + P to save the file in PDF 
 
-   * Ctrl/Cmd + S to save the file
-   * Drag and drop a file into here to load it
-   * File contents are saved in the URL so you can share files
+>**Note** (Support on Google Chrome Only) because other browser doesn't inclue save print file as pdf. So, firstly I had tried with jspdf but currently, it's failed. So, I just support google chrome only.
+   
+
+* Drag and drop a file into here to load it
+* File contents are saved in the URL so you can share files   
 
 
-  I'm no good at writing sample / filler text, so go write something yourself.
-
-  Look, a list!
+#### Look, a list!
 
    * foo
    * bar
    * baz
+   
 
-  And here's some code!
+#### And here's some code!
 
-  ```javascript
-  $(function(){
-    $('div').html('I am a div.');
-  });
-  ```
+  
+    $(function(){
+      $('div').html('I am a div.');
+    });
+  
 
-  This is [on GitHub](https://github.com/jbt/markdown-editor) so let me know if I've b0rked it somewhere.
+#### You want to see the **bold letter** or *italic*?
+ 
+
+You have to open and close with `**` to what you want to bold. 
+ 
+Example Bold->** Bold Letter **
+ 
+You have to open and close with `*` to what you want to italic. 
+
+Example Italic->*Italic*
+ 
+ 
+#### Tables
+ 
+  Item     | Value
+  -------- | ---
+  Computer | $1600
+  Phone    | $12
+  Pipe     | $1
+
+ 
+ 
+#### This is on GitHub
+
+This is [on GitHub](https://github.com/setkyar/yay) so let me know if I've b0rked it somewhere. BTW, I use [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](http://www.wtfpl.net/txt/copying/)
 
 
-  Props to Mr. Doob and his [code editor](http://mrdoob.com/projects/code-editor/), from which
-  the inspiration to this, and some handy implementation hints, came.
-
-  ### Stuff used to make this:
+### Stuff used to make this:
 
    * [marked](https://github.com/chjj) for Markdown parsing
    * [CodeMirror](http://codemirror.net/) for the awesome syntax-highlighted editor
    * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for syntax highlighting in output code blocks
    * [js-deflate](https://github.com/dankogai/js-deflate) for gzipping of data to make it fit in URLs
-          
+   
+   
+The above links are original author [jbt](https://github.com/jbt) used. As for me. I had totally clone [jbt's code](https://github.com/jbt/markdown-editor) and I modified what I want. If there is no [jbt's code](https://github.com/jbt/markdown-editor) this will not be become. Thanks [jbt](https://github.com/jbt)        .
           </textarea>
       </form>
   </div>

@@ -20,8 +20,8 @@ function update(e) {
 
     setOutput(val);
 
-    // clearTimeout(hashto);
-    // hashto = setTimeout(updateHash, 1000);
+    clearTimeout(hashto);
+    hashto = setTimeout(updateHash, 1000);
 }
 
 function setOutput(val) {
@@ -87,29 +87,44 @@ document.addEventListener('keydown', function(e) {
     }
 })
 
-// var hashto;
+document.addEventListener('keydown', function(e) {
+    if (e.keyCode === 80 && e.ctrlKey) {
+        e.preventDefault();
+        print();
+        return false;
+    };
+})
 
-// function updateHash() {
-//     window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(editor.getValue()))))
-// }
+function print() { 
+    if (navigator.userAgent.indexOf("Chrome") != -1) {
+        var newWindow = window.open();
+        newWindow.document.write(document.getElementById("out").innerHTML);
+        newWindow.print();
+    };
 
-// if (window.location.hash) {
-//     var h = window.location.hash.replace(/^#/, '');
-//     if (h.slice(0, 5) == 'view:') {
-//         setOutput(decodeURIComponent(escape(RawDeflate.inflate(atob(h.slice(5))))));
-//         document.body.className = 'view';
-//     } else {
-//         editor.setValue(decodeURIComponent(escape(RawDeflate.inflate(atob(h)))))
-//         update(editor);
-//         editor.focus();
-//     }
-// } else {
-//     update(editor);
-//     editor.focus();
-// }
+    console.log('We are now currently support chrome only. Because of Myanmar font rendering problem');
+}
 
-update(editor);
-editor.focus();
+var hashto;
+
+function updateHash() {
+    window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(editor.getValue()))))
+}
+
+if (window.location.hash) {
+    var h = window.location.hash.replace(/^#/, '');
+    if (h.slice(0, 5) == 'view:') {
+        setOutput(decodeURIComponent(escape(RawDeflate.inflate(atob(h.slice(5))))));
+        document.body.className = 'view';
+    } else {
+        editor.setValue(decodeURIComponent(escape(RawDeflate.inflate(atob(h)))))
+        update(editor);
+        editor.focus();
+    }
+} else {
+    update(editor);
+    editor.focus();
+}
 
 var GoSquared = {
     acct: 'GSN-265185-D'
